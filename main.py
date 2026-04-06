@@ -150,3 +150,7 @@ async def on_message(message):
                 await message.channel.send(leaderboard)
             else:
                 await message.channel.send("No participation data yet. Start chatting!")
+import os
+
+if __name__ == "__main__":
+    print("Bot is starting...")
