@@ -79,7 +79,7 @@ async def spark_conversation():
         for channel in guild.text_channels:
             if channel.permissions_for(guild.me).send_messages:
                 starter = random.choice(CONVERSATION_STARTERS)
-                await channel.send(f" **Community Check-in:** {starter}")
+                await channel.send(f"💬 **Community Check-in:** {starter}")
                 break
 
 
@@ -89,7 +89,7 @@ async def send_eye_care_tip():
         for channel in guild.text_channels:
             if channel.permissions_for(guild.me).send_messages:
                 tip = random.choice(EYE_CARE_TIPS)
-                await channel.send(f" **Eye Care Reminder:** {tip}")
+                await channel.send(f"👁️ **Eye Care Reminder:** {tip}")
                 break
 
 
@@ -119,7 +119,7 @@ async def on_message(message):
         if message.author.id not in warned_users:
             warned_users.add(message.author.id)
             await message.channel.send(
-                f" {message.author.mention}, please slow down! You're sending messages too fast."
+                f"⚠️ {message.author.mention}, please slow down! You're sending messages too fast."
             )
         try:
             await message.delete()
@@ -133,7 +133,7 @@ async def on_message(message):
         except discord.Forbidden:
             pass
         await message.channel.send(
-            f" {message.author.mention}, please keep the conversation respectful and safe for everyone."
+            f"⚠️ {message.author.mention}, please keep the conversation respectful and safe for everyone."
         )
         return
 
@@ -142,7 +142,7 @@ async def on_message(message):
         if any(word in message.content.lower() for word in ["leaderboard", "top members", "most active"]):
             top = sorted(participation.items(), key=lambda x: x[1], reverse=True)[:5]
             if top:
-                leaderboard = " **Most Active Members:**\n"
+                leaderboard = "🏆 **Most Active Members:**\n"
                 for i, (user_id, count) in enumerate(top, 1):
                     user = bot.get_user(user_id)
                     name = user.display_name if user else f"Member {user_id}"
@@ -150,7 +150,3 @@ async def on_message(message):
                 await message.channel.send(leaderboard)
             else:
                 await message.channel.send("No participation data yet. Start chatting!")
-import os
-
-if __name__ == "__main__":
-    print("Bot is starting...")
